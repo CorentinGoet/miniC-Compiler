@@ -44,6 +44,8 @@ Conjunction     = Equality {&& Equality}
 Equality        = Relation [ EquOp Relation ]
 EquOp           = == | !=
 Relation        = Addition [ RelOp Addition]
+RelOp           = < | > | <= | >=
+Addition        = Term { AddOp }
 AddOp           = + | -
 Term            = Factor { MulOp Factor }
 MulOp           = * | / | %

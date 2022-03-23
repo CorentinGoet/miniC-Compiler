@@ -7,7 +7,7 @@ import unittest
 from AST.node import Node
 
 
-class MyTestCase(unittest.TestCase):
+class NodeTest(unittest.TestCase):
     """
     Unit test class for the Node class.
     """

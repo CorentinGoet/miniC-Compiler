@@ -17,7 +17,7 @@ class Declaration(Node):
     Declaration = Type Identifier [ [Integer] ] {, Identifier [ [Integer] ]};
     """
 
-    def __init__(self, type: Type = None, identifier: Identifier = None, integer: Integer = None):
+    def __init__(self, type: Type = None, identifier: Identifier = None, integer: int = None):
         """
         Constructor for the Declaration node.
         :param type: Type node of the declaration

@@ -25,7 +25,7 @@ Mini-C has a syntax a little different from C, it is detailed in the
 ```ebnf
 Program         = int main(){Declarations Statements}
 Declarations    = {Declaration}
-Declaration     = Type Identifier [ [Integer] ] {, Identifier [ [Integer] ]}; 
+Declaration     = Type Identifier [ \[Integer\] ] {, Identifier [ [Integer] ]}; 
 // Be careful the first set of bracket is from ebnf and the second one is from mini-C
 Type            = int | bool | float | char
 Statements      = {Statement}

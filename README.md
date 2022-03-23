@@ -45,7 +45,7 @@ Equality        = Relation [ EquOp Relation ]
 EquOp           = == | !=
 Relation        = Addition [ RelOp Addition]
 RelOp           = < | > | <= | >=
-Addition        = Term { AddOp }
+Addition        = Term { AddOp Term }
 AddOp           = + | -
 Term            = Factor { MulOp Factor }
 MulOp           = * | / | %

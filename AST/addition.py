@@ -3,7 +3,6 @@
 """
 
 from AST.node import Node
-import enum
 
 
 class Addition(Node):
@@ -27,12 +26,3 @@ class Addition(Node):
     def accept(self, visitor):
         visitor.visitAddition()
 
-
-class AddOp(enum):
-    """
-    Enumeration of addition operators:
-    ADD: +
-    SUB: -
-    """
-    ADD = 1
-    SUB = 2

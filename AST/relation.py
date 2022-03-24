@@ -5,6 +5,7 @@
 from AST.node import Node
 from AST.addition import Addition
 import enum
+from AST.operators import RelOp
 
 
 class Relation(Node):
@@ -31,16 +32,3 @@ class Relation(Node):
     def accept(self, visitor):
         visitor.visitRelation()
 
-
-class RelOp(enum):
-    """
-    Relation Operators enumeration
-    INF: <
-    SUP: >
-    SUPEQ: >=
-    INFEQ: <=
-    """
-    INF = 1
-    SUP = 2
-    SUPEQ = 3
-    INFEQ = 4

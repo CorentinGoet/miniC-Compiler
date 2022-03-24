@@ -5,6 +5,7 @@
 import enum
 from AST.node import Node
 from AST.relation import Relation
+from AST.operators import EquOp
 
 
 class Equality(Node):
@@ -32,12 +33,4 @@ class Equality(Node):
         visitor.visitEquality()
 
 
-class EquOp(enum):
-    """
-    Enumeration of the equality operators.
-    equal: ==
-    unequal: !=
-    """
-    equal = 1
-    unequal = 2
 

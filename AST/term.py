@@ -3,7 +3,6 @@
 """
 
 from AST.node import Node
-import enum
 
 
 class Term(Node):
@@ -27,15 +26,5 @@ class Term(Node):
         visitor.visitTerm()
 
 
-class MulOp(enum):
-    """
-    Enumeration of multiplication operators
 
-    Multiplication operators have the following syntax:
-
-    MulOp = * | / | %
-    """
-    MUL = 1
-    DIV = 2
-    MOD = 3
 

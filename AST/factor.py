@@ -4,7 +4,7 @@
 
 from AST.node import Node
 from AST.primary import Primary
-import enum
+from AST.operators import UnaryOp
 
 
 class Factor(Node):
@@ -23,18 +23,11 @@ class Factor(Node):
         :param primary: primary node
         :param unaryOp: unary operator
         """
+        self.primary = primary
+        self.unaryOp = unaryOp
+
 
     def accept(self, visitor):
         visitor.visitFactor()
 
 
-class UnaryOp(enum):
-    """
-    Enumeration of Unary operators
-
-    Unary operators have the following syntax:
-
-    UnaryOp = - | !
-    """
-    NEG = 1
-    INV = 2

@@ -60,3 +60,6 @@ Boolean         = true | false
 Float           = Integer.Integer
 Char            = ' ASCII char '    // Where ASCII char is the set of ASCII Characters
 ```
+
+## Lexer
+The lexer is the part of the compiler responsible for breaking the source code into 

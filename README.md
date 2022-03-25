@@ -62,4 +62,36 @@ Char            = ' ASCII char '    // Where ASCII char is the set of ASCII Char
 ```
 
 ## Lexer
-The lexer is the part of the compiler responsible for breaking the source code into 
+The lexer is the part of the compiler responsible for breaking the source code into lexems.
+The class for the lexer is `Lexer`, found in the [lexer.py](/lexer.py) file, it has one main function `tokenize`, which
+takes a string as input and returns a list of tokens, by matching the lexems with the regexes.
+
+For example, the following mini-c source code:
+```mini-c
+int main(){
+    int a;
+}
+```
+would be tokenized as:
+```python
+Lexem(value: LexemTag.TYPE, type: int , position: [1, 0])
+Lexem(value: LexemTag.MAIN, type: main, position: [1, 4])
+Lexem(value: LexemTag.L_PARENTHESIS, type: (, position: [1, 8])
+Lexem(value: LexemTag.R_PARENTHESIS, type: ), position: [1, 9])
+Lexem(value: LexemTag.L_BRACE, type: {, position: [1, 10])
+Lexem(value: LexemTag.TYPE, type: int , position: [2, 4])
+Lexem(value: LexemTag.IDENTIFIER, type: a, position: [2, 8])
+Lexem(value: LexemTag.TERMINATOR, type: ;, position: [2, 9])
+Lexem(value: LexemTag.R_BRACE, type: }, position: [3, 0])
+```
+
+with the following instructions:
+```python
+from lexer import Lexer
+lexer = Lexer()
+lexer.tokenize("int main(){int a;}")
+print(lexer)
+```
+
+## Parser
+The parser is the part of the compiler responsible for turning the lexems into an AST.

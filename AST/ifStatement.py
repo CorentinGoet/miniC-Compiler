@@ -28,6 +28,16 @@ class IfStatement(Node):
         self.trueStatement = trueStatement
         self.falseStatement = falseStatement
 
+    def __str__(self):
+        s = "IfStatement:\nIF "
+        s += "Condition: " + str(self.expression) + "{" + "\n"
+        s += "THEN " + str(self.trueStatement) + "\n"
+        s += "}"
+        if self.falseStatement is not None:
+            s += "ELSE " + "{" + str(self.falseStatement) + "}"
+        return s
+
+
     def accept(self, visitor):
         visitor.visitIfStatement()
 

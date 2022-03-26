@@ -125,7 +125,7 @@ class Parser:
         """
         Parses the statement lexem.
 
-        The statement can be an if statement, a while statement, a block or a terminator.
+        The statement can be an if statement, a while statement, or an assignment.
         """
         next_lexem = self.peek()
         if next_lexem.tag == LexemTag.IF_kw:
@@ -133,7 +133,10 @@ class Parser:
         elif next_lexem.tag == LexemTag.WHILE_kw:
             return Statement(self.parse_whileStatement())
         else:
-            raise ValueError("{} is not a valid statement.".format(next_lexem))
+            try:
+                return Statement(self.parse_assignment())
+            except Exception:
+                raise ValueError("{} is not a valid statement.".format(next_lexem))
 
     def parse_ifStatement(self):
         """
@@ -172,6 +175,18 @@ class Parser:
         self.expect(LexemTag.R_BRACE)
         return WhileStatement(expression, statement)
 
+    def parse_assignment(self):
+        """
+        Parses the assignment lexem.
+
+        The assignment has the syntax: "id = Expression;"
+        """
+        identifier = self.parse_identifier()
+        self.expect(LexemTag.ASSIGNMENT)
+        expression = self.parse_expression()
+        self.expect(LexemTag.TERMINATOR)
+        return Assignment(identifier, expression)
+
     def parse_expression(self):
         """
         Parses the expression lexem.
@@ -205,9 +220,11 @@ class Parser:
         The equality has the syntax: "Relation [ EquOp Relation ]"
         """
         relation = self.parse_relation()
-        equ_op = self.parse_equOp().value
-        relation2 = self.parse_relation()
-        return Equality(relation, equ_op.value, relation2)
+        if self.peek().tag == LexemTag.EQUAL or self.peek().tag == LexemTag.NOT_EQUAL:
+            equ_op = self.parse_equop().value
+            relation2 = self.parse_relation()
+            return Equality(relation, equ_op.value, relation2)
+        return Equality(relation)
     
     def parse_equop(self):
         """
@@ -227,9 +244,11 @@ class Parser:
         The relation has the syntax: "Addition [ RelOp Addition ]"
         """
         addition = self.parse_addition()
-        rel_op = self.parse_relop().value
-        addition2 = self.parse_addition()
-        return Relation(addition, rel_op, addition2)
+        if self.peek().tag in [LexemTag.LESS, LexemTag.LESS_EQUAL, LexemTag.GREATER, LexemTag.GREATER_EQUAL]:
+            rel_op = self.parse_relop().value
+            addition2 = self.parse_addition()
+            return Relation(addition, rel_op.value, addition2)
+        return Relation(addition)
 
     def parse_relop(self):
         """
@@ -306,8 +325,12 @@ class Parser:
         """
         if self.peek().tag == LexemTag.SUBTRACTION or self.peek().tag == LexemTag.NOT:
             unary_op = self.parse_unary_op()
+            primary = self.parse_primary()
+            return Factor(unary_op, primary)
         primary = self.parse_primary()
-        return Factor(primary, unary_op)
+        return Factor(None, primary)
+
+
 
     def parse_unary_op(self):
         """

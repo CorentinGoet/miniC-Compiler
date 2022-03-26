@@ -29,6 +29,9 @@ class Relation(Node):
         self.relOp = relOp
         self.addition2 = addition2
 
+    def __str__(self):
+        return "Relation(" + str(self.addition1) + ", " + str(self.relOp) + ", " + str(self.addition2) + ")"
+
     def accept(self, visitor):
         visitor.visitRelation()
 

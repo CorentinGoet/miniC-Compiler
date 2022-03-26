@@ -21,6 +21,13 @@ class Statements(Node):
         """
         self.statements = statements
 
+    def __str__(self):
+        s = "{\n"
+        for statement in self.statements:
+            s += "\t\t" + str(statement) + "\n"
+        s += "\t}"
+        return s
+
     def accept(self, visitor):
         visitor.visitStatements()
 

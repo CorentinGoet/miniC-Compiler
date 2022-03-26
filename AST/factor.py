@@ -26,6 +26,13 @@ class Factor(Node):
         self.primary = primary
         self.unaryOp = unaryOp
 
+    def __str__(self):
+        s = "Factor("
+        if self.unaryOp is not None:
+            s += str(self.unaryOp) + " "
+        s += str(self.primary)
+        s += ")"
+        return s
 
     def accept(self, visitor):
         visitor.visitFactor()

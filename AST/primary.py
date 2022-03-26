@@ -22,6 +22,9 @@ class Primary(Node):
         """
         self.sonNode = sonNode
 
+    def __str__(self):
+        return "Primary(" + str(self.sonNode) + ")"
+
     def accept(self, visitor):
         visitor.visitPrimary()
 

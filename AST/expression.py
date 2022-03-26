@@ -22,5 +22,12 @@ class Expression(Node):
         """
         self.conjunctions = conjunctions
 
+    def __str__(self):
+        s = "Expression : {"
+        for conjunction in self.conjunctions:
+            s += " " + str(conjunction)
+        s += "}"
+        return s
+
     def accept(self, visitor):
         visitor.visitExpression()

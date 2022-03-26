@@ -21,6 +21,17 @@ class Term(Node):
         :param factors: list of Factor node
         :param operators: list of multiplication operators (MulOp)
         """
+        self.factors = factors
+        self.operators = operators
+
+    def __str__(self):
+        s = "Term("
+        for i in range(len(self.factors)):
+            s += str(self.factors[i])
+            if i < len(self.operators):
+                s += str(self.operators[i])
+        s += ")"
+        return s
 
     def accept(self, visitor):
         visitor.visitTerm()

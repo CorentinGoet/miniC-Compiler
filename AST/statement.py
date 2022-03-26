@@ -21,6 +21,9 @@ class Statement(Node):
         """
         self.son_node = son_node
 
+    def __str__(self):
+        return "Statement: " + str(self.son_node)
+
     def accept(self, visitor):
         visitor.visitStatement()
 

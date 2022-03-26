@@ -31,6 +31,9 @@ class Type(Node):
         """
         self.type = type
 
+    def __str__(self):
+        return "Type: " + self.type
+
     def accept(self, visitor):
         visitor.visitType()
 
@@ -43,3 +46,5 @@ class Types(enum.Enum):
     BOOL = "bool"
     FLOAT = "float"
     CHAR = "char"
+
+

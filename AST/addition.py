@@ -23,6 +23,15 @@ class Addition(Node):
         self.terms = terms
         self.operators = operators
 
+    def __str__(self):
+        s = "Addition("
+        for i in range(len(self.terms)):
+            s += str(self.terms[i])
+            if self.operators is not None and i < len(self.operators):
+                s += str(self.operators[i])
+        s += ")"
+        return s
+
     def accept(self, visitor):
         visitor.visitAddition()
 

@@ -25,11 +25,12 @@ class Declaration(Node):
         :param integer: Integer node (optional: only used for arrays)
         """
         # TODO: add arrays
+        self.type = type
         self.identifier = identifier
         self.integer = integer
 
     def __str__(self):
-        return "Declaration : " + str(self.identifier)
+        return "Declaration : " + str(self.type) + "," + str(self.identifier)
 
     def accept(self, visitor):
         visitor.visitDeclaration()

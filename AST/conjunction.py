@@ -22,6 +22,13 @@ class Conjunction(Node):
         """
         self.equalities = equalities
 
+    def __str__(self):
+        s = "Conjunction { "
+        for equality in self.equalities:
+            s += str(equality) + " "
+        s += "}"
+        return s
+
     def accept(self, visitor):
         visitor.visitConjunction()
 

@@ -27,7 +27,7 @@ class Program(Node):
         self.statements = statements
 
     def __str__(self):
-        return "Program(\n\tDeclarations: {}\n\tStatements: {})".format(self.declarations, self.statements)
+        return "Program(\n\tDeclarations: {}\n\tStatements: {}\n)".format(self.declarations, self.statements)
 
     def accept(self, visitor):
         visitor.visitProgram()

@@ -27,5 +27,8 @@ class Assignment(Node):
         self.identifier = identifier
         self.expression = expression
 
+    def __str__(self):
+        return "Assignment: " + str(self.identifier) + " = " + str(self.expression)
+
     def accept(self, visitor):
         visitor.visitAssignment()

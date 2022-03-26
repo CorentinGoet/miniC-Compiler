@@ -22,9 +22,10 @@ class Declarations(Node):
         self.declarations = declarations
 
     def __str__(self):
-        s = "Declarations = {\n"
+        s = "{\n"
         for declaration in self.declarations:
             s += "\t\t\t" + str(declaration) + "\n"
+        s += "\t}"
         return s
 
     def accept(self, visitor):

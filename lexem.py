@@ -45,5 +45,17 @@ class LexemTag(str, enum.Enum):
     FLOAT = "FLOAT"
     CHAR = "CHAR"
     BOOL = "BOOL"
+    IF_kw = "IF"
+    ELSE_kw = "ELSE"
+    WHILE_kw = "WHILE"
+    AND = "AND"
+    OR = "OR"
+    EQUAL = "EQUAL"
+    NOT_EQUAL = "NOT_EQUAL"
+    GREATER = "GREATER"
+    LESS = "LESS"
+    GREATER_EQUAL = "GREATER_EQUAL"
+    LESS_EQUAL = "LESS_EQUAL"
+    NOT = "NOT"
 
 

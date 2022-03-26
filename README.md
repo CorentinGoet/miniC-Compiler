@@ -95,3 +95,5 @@ print(lexer)
 
 ## Parser
 The parser is the part of the compiler responsible for turning the lexems into an AST.
+It takes the list of lexems given by the lexer and builds the AST from the classes found in the AST package.
+

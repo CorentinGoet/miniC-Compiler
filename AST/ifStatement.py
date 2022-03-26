@@ -34,7 +34,7 @@ class IfStatement(Node):
         s += "THEN " + str(self.trueStatement) + "\n"
         s += "}"
         if self.falseStatement is not None:
-            s += "ELSE " + "{" + str(self.falseStatement) + "}"
+            s += "ELSE" + "{\n" + str(self.falseStatement) + "\n}"
         return s
 
 

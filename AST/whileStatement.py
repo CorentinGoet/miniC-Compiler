@@ -26,6 +26,12 @@ class WhileStatement(Node):
         self.expression = expression
         self.statement = statement
 
+    def __str__(self):
+        s = "WhileStatement: \n"
+        s += "WHILE  Expression: " + str(self.expression) + "{\n"
+        s += "Statement: " + str(self.statement) + "\n}"
+        return s
+
     def accept(self, visitor):
         visitor.visitWhileStatement()
 

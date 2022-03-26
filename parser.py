@@ -247,7 +247,7 @@ class Parser:
         if self.peek().tag in [LexemTag.LESS, LexemTag.LESS_EQUAL, LexemTag.GREATER, LexemTag.GREATER_EQUAL]:
             rel_op = self.parse_relop().value
             addition2 = self.parse_addition()
-            return Relation(addition, rel_op.value, addition2)
+            return Relation(addition, rel_op, addition2)
         return Relation(addition)
 
     def parse_relop(self):

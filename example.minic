@@ -1,6 +1,7 @@
 int main(){
     int a;
     bool b;
+    float c;
     a=1;
     b = true;
     if(b){
@@ -8,5 +9,8 @@ int main(){
     }
     else{
         a = 3;
+    }
+    while(!b || a >= 2){
+        c = c + a;
     }
 }

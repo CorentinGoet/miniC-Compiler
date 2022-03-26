@@ -14,7 +14,8 @@ class Parser:
     def __init__(self):
         self.lexems = []
 
-    def peek(self, n: int=1):
+
+    def peek(self, n: int=0):
         """
         Returns the nth next lexem without consuming it.
         """
@@ -32,7 +33,8 @@ class Parser:
         if lexem.tag == tag:
             return self.accept()
         else:
-            print("Error: expected " + tag.name + " but got " + lexem.tag.name)
+            raise TypeError("Error: expected {} but got {}".format(tag, lexem.tag))
+
 
     def accept(self):
         """
@@ -44,13 +46,70 @@ class Parser:
         """
         Parses the lexems and returns the AST.
         """
-        programNode = Program()
+        self.lexems = lexems
+        return self.parse_program()
 
     def parse_program(self):
         """
         Parses the program lexem.
+        The program has the syntax "int main(){ Declarations Statements }"
         """
-        pass
+
+        self.expect(LexemTag.TYPE)
+        self.expect(LexemTag.MAIN)
+        self.expect(LexemTag.L_PARENTHESIS)
+        self.expect(LexemTag.R_PARENTHESIS)
+        self.expect(LexemTag.L_BRACE)
+
+        declarations = self.parse_declarations()
+        statements = self.parse_statements()
+
+        program = Program(declarations, statements)
+        self.expect(LexemTag.R_BRACE)
+        return program
+
+    def parse_declarations(self):
+        """
+        Parses the declarations lexem.
+
+        The declarations have the syntax "{ Declaration }"
+        """
+        declarations = []
+        while True:
+            try:
+                declarations.append(self.parse_declaration())
+            except TypeError:
+                break
+        return Declarations(declarations)
+
+    def parse_declaration(self):
+        """
+        Parses the declaration lexem.
+
+        The declaration has the syntax "type id;"
+        """
+        type = self.parse_type()
+        id = self.parse_identifier()
+        self.expect(LexemTag.TERMINATOR)
+        return Declaration(type, id)
+
+    def parse_type(self):
+        """
+        Parses the type lexem.
+
+        The type has the syntax "int|float|bool|char"
+        """
+        t = self.expect(LexemTag.TYPE)
+        return Type(t.value)
+
+    def parse_identifier(self):
+        """
+        Parses the identifier lexem.
+
+        The identifier has the syntax "Letter{Letter|Digit}"
+        """
+        identifier = self.expect(LexemTag.IDENTIFIER)
+        return Identifier(identifier.value)
 
     def parse_block(self):
         """
@@ -91,24 +150,6 @@ class Parser:
     def parse_whileStatement(self):
         """
         Parses the whileStatement lexem.
-        """
-        pass
-
-    def parse_declarations(self):
-        """
-        Parses the declarations lexem.
-        """
-        pass
-
-    def parse_declaration(self):
-        """
-        Parses the declaration lexem.
-        """
-        pass
-
-    def parse_type(self):
-        """
-        Parses the type lexem.
         """
         pass
 
@@ -160,4 +201,4 @@ class Parser:
         """
         pass
 
-    def parse
+

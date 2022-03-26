@@ -35,11 +35,11 @@ class Type(Node):
         visitor.visitType()
 
 
-class Types(enum):
+class Types(enum.Enum):
     """
     Type enumeration.
     """
-    INT = 1
-    BOOL = 2
-    FLOAT = 3
-    CHAR = 4
+    INT = "int"
+    BOOL = "bool"
+    FLOAT = "float"
+    CHAR = "char"

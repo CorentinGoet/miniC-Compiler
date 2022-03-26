@@ -23,6 +23,6 @@ from AST.relation import Relation
 from AST.statement import Statement
 from AST.statements import Statements
 from AST.term import Term
-from AST.type import Type
+from AST.type import Type, Types
 from AST.whileStatement import WhileStatement
 

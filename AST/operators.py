@@ -6,7 +6,7 @@ This file contains the enumerations of operators.
 import enum
 
 
-class AddOp(enum):
+class AddOp(enum.Enum):
     """
     Enumeration of addition operators:
 
@@ -17,7 +17,7 @@ class AddOp(enum):
     SUB = 2
 
 
-class EquOp(enum):
+class EquOp(enum.Enum):
     """
     Enumeration of the equality operators.
     equal: ==
@@ -27,7 +27,7 @@ class EquOp(enum):
     unequal = 2
 
 
-class UnaryOp(enum):
+class UnaryOp(enum.Enum):
     """
     Enumeration of Unary operators
 
@@ -39,7 +39,7 @@ class UnaryOp(enum):
     INV = 2
 
 
-class RelOp(enum):
+class RelOp(enum.Enum):
     """
     Relation Operators enumeration
     INF: <
@@ -53,7 +53,7 @@ class RelOp(enum):
     INFEQ = 4
 
 
-class MulOp(enum):
+class MulOp(enum.Enum):
     """
     Enumeration of multiplication operators
 

@@ -64,8 +64,8 @@ class Lexer:
                     match = regex.match(line, position)
                     if match:
                         data = match.group(0)
-                        lex = Lexem(tag, data, [lineNumber, position])
-                        if lex.value is not None:
+                        lex = Lexem(data, tag, [lineNumber, position])
+                        if lex.tag is not None:
                             self.lexems.append(lex)
                         position = match.end()
                         break

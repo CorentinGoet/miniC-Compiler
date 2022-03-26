@@ -21,7 +21,7 @@ class Lexem:
         return self.tag
 
 
-class LexemTag(enum.Enum):
+class LexemTag(str, enum.Enum):
     """
     Enumeration of the different possible tags for Lexem.
     """

@@ -5,7 +5,7 @@
 from AST.node import Node
 from AST.type import Type
 from AST.identifier import Identifier
-from AST.Integer import Integer
+
 
 
 class Declaration(Node):
@@ -28,5 +28,9 @@ class Declaration(Node):
         self.identifier = identifier
         self.integer = integer
 
+    def __str__(self):
+        return "Declaration : " + str(self.identifier)
+
     def accept(self, visitor):
         visitor.visitDeclaration()
+

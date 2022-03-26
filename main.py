@@ -3,6 +3,7 @@
 """
 
 from lexer import Lexer
+from parser import Parser
 
 
 if __name__ == '__main__':
@@ -10,3 +11,7 @@ if __name__ == '__main__':
     lexer = Lexer()
     lexer.tokenize(source_code)
     print(lexer)
+    parser = Parser()
+    ast = parser.parse(lexer.lexems)
+    print(ast)
+

@@ -7,7 +7,6 @@ from lexer import Lexer
 from lexem import Lexem, LexemTag
 
 
-
 class LexerTest(unittest.TestCase):
     """
     Test class for the Lexer.

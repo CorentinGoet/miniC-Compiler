@@ -9,7 +9,7 @@ class Lexem:
     """
     The lexem is the token of code containing a value, a type and a position in the source code.
     """
-    def __init__(self, value, tag, position):
+    def __init__(self, value: str, tag: str, position: list):
         self.value = value
         self.tag = tag
         self.position = position
@@ -19,6 +19,9 @@ class Lexem:
 
     def __repr__(self):
         return self.tag
+
+    def __eq__(self, other):
+        return self.value == other.value and self.tag == other.tag and self.position == other.position
 
 
 class LexemTag(str, enum.Enum):
@@ -57,5 +60,9 @@ class LexemTag(str, enum.Enum):
     GREATER_EQUAL = "GREATER_EQUAL"
     LESS_EQUAL = "LESS_EQUAL"
     NOT = "NOT"
+    COMMA = "COMMA"
+
+    def __eq__(self, other):
+        return self.value == other.value
 
 

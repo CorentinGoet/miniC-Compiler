@@ -21,6 +21,30 @@ class LexerTest(unittest.TestCase):
         """
         self.lexer = Lexer()
 
+    def test_lexem(self):
+        """
+        Tests the methods inside of the Lexem class.
+        """
+        lexem = Lexem("42", LexemTag.INTEGER, [2, 3])
+        self.assertEqual(lexem.tag, LexemTag.INTEGER)
+        self.assertEqual(lexem.value, "42")
+        self.assertEqual(lexem.position, [2, 3])
+        test_lexem = Lexem("42", LexemTag.INTEGER, [2, 3])
+        self.assertEqual(test_lexem, lexem)
+        self.assertNotEqual(test_lexem, Lexem("42", LexemTag.INTEGER, [2, 4]))
+        self.assertNotEqual(test_lexem, Lexem("42", LexemTag.INTEGER, [3, 3]))
+        self.assertNotEqual(test_lexem, Lexem("43", LexemTag.INTEGER, [2, 3]))
+        self.assertNotEqual(test_lexem, Lexem("42", LexemTag.FLOAT, [2, 3]))
+        self.assertEqual("Lexem(value: 42, type: INTEGER, position: [2, 3])", str(test_lexem))
+
+    def test_str_lexer(self):
+        """
+        Tests the str representation of the lexer.
+        """
+        source_code = "int a"
+        self.lexer.tokenize(source_code)
+        self.assertEqual(str(self.lexer), "Lexem(value: int, type: TYPE, position: [1, 0])\nLexem(value: a, type: IDENTIFIER, position: [1, 4])")
+
     def test_main(self):
         """
         Tests the lexing of the main.
@@ -214,6 +238,13 @@ class LexerTest(unittest.TestCase):
         source_code = " \t\n\r"
         self.lexer.tokenize(source_code)
         self.assertEqual(self.lexer.lexems, [])
+
+    def test_errors(self):
+        """
+        Tests the lexer for invalid characters.
+        """
+        source_code = "$"
+        self.assertRaises(Exception, self.lexer.tokenize, source_code)
 
 
 if __name__ == '__main__':

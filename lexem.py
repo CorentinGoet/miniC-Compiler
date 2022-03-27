@@ -17,9 +17,6 @@ class Lexem:
     def __str__(self):
         return "Lexem(value: {}, type: {}, position: {})".format(self.value, self.tag, self.position)
 
-    def __repr__(self):
-        return self.tag
-
     def __eq__(self, other):
         return self.value == other.value and self.tag == other.tag and self.position == other.position
 
@@ -61,8 +58,5 @@ class LexemTag(str, enum.Enum):
     LESS_EQUAL = "LESS_EQUAL"
     NOT = "NOT"
     COMMA = "COMMA"
-
-    def __eq__(self, other):
-        return self.value == other.value
 
 

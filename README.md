@@ -93,6 +93,10 @@ lexer.tokenize("int main(){int a;}")
 print(lexer)
 ```
 
+### Tests
+The lexer is tested in the [lexerTest.py](unit_tests/lexerTest.py) file. Each syntax possibility is tested with a 
+separate method. This test file gives a test coverage of 100% for the Lexer and Lexem classes.
+
 ## Parser
 The parser is the part of the compiler responsible for turning the lexems into an AST.
 It takes the list of lexems given by the lexer and builds the AST from the classes found in the AST package.

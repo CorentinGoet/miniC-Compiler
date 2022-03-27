@@ -43,11 +43,11 @@ class Lexer:
         (r'int|float|char|bool', LexemTag.TYPE),
         (r'true|false', LexemTag.BOOL),
         (r'([a-zA-Z](\d|[a-zA-Z])*)', LexemTag.IDENTIFIER),
-        (r'\d+', LexemTag.INTEGER),
         (r'\d+\.\d+', LexemTag.FLOAT),
+        (r'\d+', LexemTag.INTEGER),
         (r"\'(.)\'", LexemTag.CHAR),
 
-        (r'[ \n\t]+', None),
+        (r'[ \n\r\t]+', None),
     ]
 
     def __init__(self):
@@ -82,6 +82,8 @@ class Lexer:
                             self.lexems.append(lex)
                         position = match.end()
                         break
+                if not match:
+                    position += 1
             if not match:
                 errMsg = "Syntax error at line {} position {}.\n".format(lineNumber, position)
                 errMsg += "Unrecognized token: \n {}".format(line)

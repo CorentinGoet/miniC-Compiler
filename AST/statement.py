@@ -24,6 +24,11 @@ class Statement(Node):
     def __str__(self):
         return "Statement: " + str(self.son_node)
 
+    def __eq__(self, other):
+        if isinstance(other, Statement):
+            return self.son_node == other.son_node
+        return False
+
     def accept(self, visitor):
         visitor.visitStatement()
 

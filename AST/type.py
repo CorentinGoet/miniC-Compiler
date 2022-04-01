@@ -17,7 +17,7 @@ class Type(Node):
     Use Types.[INT | BOOL | FLOAT | CHAR] to instantiate].
     """
 
-    def __init__(self, type: int):
+    def __init__(self, type: str):
         """
         Constructor for Type node.
 
@@ -34,11 +34,14 @@ class Type(Node):
     def __str__(self):
         return "Type: " + self.type
 
+    def __eq__(self, other):
+        return isinstance(other, Type) and self.type == other.type
+
     def accept(self, visitor):
         visitor.visitType()
 
 
-class Types(enum.Enum):
+class Types(str, enum.Enum):
     """
     Type enumeration.
     """

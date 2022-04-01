@@ -1,0 +1,10 @@
+int main(){
+    int a;
+    int bTest2Var, c;
+    float d;
+    float e, f2Test;
+    char h;
+    char i, jTestVar;
+    bool aTestVar;
+    bool b, cTest2Var;
+}

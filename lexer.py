@@ -47,7 +47,7 @@ class Lexer:
         (r'\d+', LexemTag.INTEGER),
         (r"\'(.)\'", LexemTag.CHAR),
 
-        (r'[ \n\r\t]+', None),
+        (r'[\s\n\r\t]+', None),
     ]
 
     def __init__(self):

@@ -21,8 +21,7 @@ class Parser:
         if len(self.lexems) > n:
             return self.lexems[n]
         else:
-            print("Error: no more lexems to peek.")
-            sys.exit(1)
+            raise ValueError("No more lexems to peek.")
 
     def expect(self, tag: LexemTag):
         """
@@ -52,7 +51,6 @@ class Parser:
         Parses the program lexem.
         The program has the syntax "int main(){ Declarations Statements }"
         """
-
         self.expect(LexemTag.TYPE)
         self.expect(LexemTag.MAIN)
         self.expect(LexemTag.L_PARENTHESIS)
@@ -63,7 +61,10 @@ class Parser:
         statements = self.parse_statements()
 
         program = Program(declarations, statements)
+
         self.expect(LexemTag.R_BRACE)
+
+        self.ast = program
         return program
 
     def parse_declarations(self):
@@ -77,6 +78,10 @@ class Parser:
             try:
                 declarations.append(self.parse_declaration())
             except TypeError:
+                # The parser found a non declaration lexem, so we stop parsing declarations
+                break
+            except ValueError:
+                # No more lexems to peek
                 break
         return Declarations(declarations)
 
@@ -87,9 +92,17 @@ class Parser:
         The declaration has the syntax "type id;"
         """
         type = self.parse_type()
-        id = self.parse_identifier()
+        identifiers = [self.parse_identifier()]
+        if self.peek().tag == LexemTag.COMMA:
+            # We have multiple identifiers
+            while True:
+                self.expect(LexemTag.COMMA)
+                id = self.parse_identifier()
+                identifiers.append(id)
+                if self.peek().tag != LexemTag.COMMA:
+                    break
         self.expect(LexemTag.TERMINATOR)
-        return Declaration(type, id)
+        return Declaration(type, identifiers)
 
     def parse_type(self):
         """
@@ -116,9 +129,15 @@ class Parser:
         The statements has the syntax "{Statement}"
         """
         statements = []
-        while self.peek().tag != LexemTag.R_BRACE:  # While we don't encounter the closing } from main
-            if self.peek().tag != LexemTag.TERMINATOR:  # Ignore empty statements with just ;
-                statements.append(self.parse_statement())
+        while True:
+            try:
+                if self.peek().tag == LexemTag.R_BRACE:
+                    break
+                if self.peek().tag != LexemTag.TERMINATOR:
+                    statements.append(self.parse_statement())
+            except ValueError:
+                # No more lexems to peek
+                break
         return Statements(statements)
 
     def parse_statement(self):
@@ -136,7 +155,7 @@ class Parser:
             try:
                 return Statement(self.parse_assignment())
             except Exception:
-                raise ValueError("{} is not a valid statement.".format(next_lexem))
+                raise TypeError("{} is not a valid statement.".format(next_lexem))
 
     def parse_ifStatement(self):
         """
@@ -223,7 +242,7 @@ class Parser:
         if self.peek().tag == LexemTag.EQUAL or self.peek().tag == LexemTag.NOT_EQUAL:
             equ_op = self.parse_equop().value
             relation2 = self.parse_relation()
-            return Equality(relation, equ_op.value, relation2)
+            return Equality(relation, equ_op, relation2)
         return Equality(relation)
     
     def parse_equop(self):

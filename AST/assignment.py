@@ -30,5 +30,9 @@ class Assignment(Node):
     def __str__(self):
         return "Assignment: " + str(self.identifier) + " = " + str(self.expression)
 
+    def __eq__(self, other):
+        return isinstance(other, Assignment) and self.identifier == other.identifier \
+               and self.expression == other.expression
+
     def accept(self, visitor):
         visitor.visitAssignment()

@@ -28,5 +28,10 @@ class Declarations(Node):
         s += "\t}"
         return s
 
+    def __eq__(self, other):
+        if isinstance(other, Declarations):
+            return self.declarations == other.declarations
+        return False
+
     def accept(self, visitor):
         visitor.visitDeclarations()

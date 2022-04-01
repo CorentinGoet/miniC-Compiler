@@ -1,0 +1,15 @@
+int main (){
+    int a;
+    float b;
+    char c;
+    bool d;
+
+    a = 123;
+    a = -345;
+    b = 123.456;
+    b = -789.123;
+    c = 'a';
+    c = '?';
+    d = true;
+    d = false;
+}

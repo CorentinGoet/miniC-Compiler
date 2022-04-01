@@ -25,6 +25,9 @@ class Identifier(Node):
     def __str__(self):
         return "Identifier: " + self.name
 
+    def __eq__(self, other):
+        return isinstance(other, Identifier) and self.name == other.name
+
     def accept(self, visitor):
         visitor.visitIdentifier()
 

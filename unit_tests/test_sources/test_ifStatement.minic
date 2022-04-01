@@ -1,0 +1,10 @@
+int main(){
+    int a;
+    bool b;
+
+    if (a == 2 || b && a == 3){
+        a = 4;
+    }else{
+        c = 5;
+    }
+}

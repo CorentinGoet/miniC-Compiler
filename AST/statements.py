@@ -28,6 +28,11 @@ class Statements(Node):
         s += "\t}"
         return s
 
+    def __eq__(self, other):
+        if isinstance(other, Statements):
+            return self.statements == other.statements
+        return False
+
     def accept(self, visitor):
         visitor.visitStatements()
 

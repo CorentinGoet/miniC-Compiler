@@ -17,7 +17,7 @@ class Declaration(Node):
     Declaration = Type Identifier [ [Integer] ] {, Identifier [ [Integer] ]};
     """
 
-    def __init__(self, type: Type = None, identifier: Identifier = None, integer: int = None):
+    def __init__(self, type: Type = None, identifier: list = None, integer: int = None):
         """
         Constructor for the Declaration node.
         :param type: Type node of the declaration
@@ -31,6 +31,11 @@ class Declaration(Node):
 
     def __str__(self):
         return "Declaration : " + str(self.type) + "," + str(self.identifier)
+
+    def __eq__(self, other):
+        if isinstance(other, Declaration):
+            return self.type == other.type and self.identifier == other.identifier
+        return False
 
     def accept(self, visitor):
         visitor.visitDeclaration()

@@ -29,5 +29,10 @@ class Program(Node):
     def __str__(self):
         return "Program(\n\tDeclarations: {}\n\tStatements: {}\n)".format(self.declarations, self.statements)
 
+    def __eq__(self, other):
+        if isinstance(other, Program):
+            return self.declarations == other.declarations and self.statements == other.statements
+        return False
+
     def accept(self, visitor):
         visitor.visitProgram()

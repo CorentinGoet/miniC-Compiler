@@ -1,6 +1,4 @@
 # Mini-C Compiler
-![licence MIT](https://img.shields.io/badge/license-MIT-green)
-![tests 100%](https://img.shields.io/badge/tests-100%25-success)
 
 **This project is in development, the first version is not released yet.**
 

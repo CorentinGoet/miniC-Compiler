@@ -24,6 +24,6 @@ class Literal(Node):
         self.sonNode = sonNode
 
     def accept(self, visitor):
-        visitor.visitLiteral()
+        visitor.visitLiteral(self)
 
 

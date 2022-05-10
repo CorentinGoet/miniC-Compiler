@@ -33,5 +33,5 @@ class WhileStatement(Node):
         return s
 
     def accept(self, visitor):
-        visitor.visitWhileStatement()
+        visitor.visitWhileStatement(self)
 

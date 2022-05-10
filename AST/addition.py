@@ -33,5 +33,5 @@ class Addition(Node):
         return s
 
     def accept(self, visitor):
-        visitor.visitAddition()
+        visitor.visitAddition(self)
 

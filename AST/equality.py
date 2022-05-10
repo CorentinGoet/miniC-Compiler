@@ -33,7 +33,7 @@ class Equality(Node):
         return "Equality({}, {}, {})".format(self.relation1, self.equOp, self.relation2)
 
     def accept(self, visitor):
-        visitor.visitEquality()
+        visitor.visitEquality(self)
 
 
 

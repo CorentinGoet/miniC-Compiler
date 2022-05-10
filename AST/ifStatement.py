@@ -37,7 +37,6 @@ class IfStatement(Node):
             s += "ELSE" + "{\n" + str(self.falseStatement) + "\n}"
         return s
 
-
     def accept(self, visitor):
-        visitor.visitIfStatement()
+        visitor.visitIfStatement(self)
 

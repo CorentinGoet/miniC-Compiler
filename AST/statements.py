@@ -36,3 +36,6 @@ class Statements(Node):
     def accept(self, visitor):
         visitor.visitStatements()
 
+    def get_statements(self):
+        return self.statements
+    

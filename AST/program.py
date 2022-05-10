@@ -35,4 +35,4 @@ class Program(Node):
         return False
 
     def accept(self, visitor):
-        visitor.visitProgram()
+        visitor.visitProgram(self)

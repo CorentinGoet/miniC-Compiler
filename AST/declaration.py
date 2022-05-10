@@ -38,5 +38,5 @@ class Declaration(Node):
         return False
 
     def accept(self, visitor):
-        visitor.visitDeclaration()
+        visitor.visitDeclaration(self)
 

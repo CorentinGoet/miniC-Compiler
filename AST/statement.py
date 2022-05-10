@@ -30,6 +30,6 @@ class Statement(Node):
         return False
 
     def accept(self, visitor):
-        visitor.visitStatement()
+        visitor.visitStatement(self)
 
 

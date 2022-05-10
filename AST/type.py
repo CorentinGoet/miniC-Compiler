@@ -38,7 +38,7 @@ class Type(Node):
         return isinstance(other, Type) and self.type == other.type
 
     def accept(self, visitor):
-        visitor.visitType()
+        visitor.visitType(self)
 
 
 class Types(str, enum.Enum):

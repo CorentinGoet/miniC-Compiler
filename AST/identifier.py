@@ -29,6 +29,6 @@ class Identifier(Node):
         return isinstance(other, Identifier) and self.name == other.name
 
     def accept(self, visitor):
-        visitor.visitIdentifier()
+        visitor.visitIdentifier(self)
 
 

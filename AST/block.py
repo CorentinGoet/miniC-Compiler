@@ -20,8 +20,11 @@ class Block(Node):
 
         :param statements: list of Statements nodes
         """
-        self.statements= statements
+        self.statements = statements
 
     def accept(self, visitor):
-        visitor.visitBlock()
+        visitor.visitBlock(self)
+
+    def get_statements(self):
+        return self.statements
 

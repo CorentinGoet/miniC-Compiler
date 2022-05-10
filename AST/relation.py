@@ -33,5 +33,5 @@ class Relation(Node):
         return "Relation(" + str(self.addition1) + ", " + str(self.relOp) + ", " + str(self.addition2) + ")"
 
     def accept(self, visitor):
-        visitor.visitRelation()
+        visitor.visitRelation(self)
 

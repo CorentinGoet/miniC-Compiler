@@ -30,4 +30,4 @@ class Expression(Node):
         return s
 
     def accept(self, visitor):
-        visitor.visitExpression()
+        visitor.visitExpression(self)

@@ -26,6 +26,6 @@ class Primary(Node):
         return "Primary(" + str(self.sonNode) + ")"
 
     def accept(self, visitor):
-        visitor.visitPrimary()
+        visitor.visitPrimary(self)
 
 

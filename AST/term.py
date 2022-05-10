@@ -34,7 +34,7 @@ class Term(Node):
         return s
 
     def accept(self, visitor):
-        visitor.visitTerm()
+        visitor.visitTerm(self)
 
 
 

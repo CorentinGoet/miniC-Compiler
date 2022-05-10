@@ -35,6 +35,6 @@ class Factor(Node):
         return s
 
     def accept(self, visitor):
-        visitor.visitFactor()
+        visitor.visitFactor(self)
 
 

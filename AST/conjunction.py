@@ -30,7 +30,7 @@ class Conjunction(Node):
         return s
 
     def accept(self, visitor):
-        visitor.visitConjunction()
+        visitor.visitConjunction(self)
 
 
 

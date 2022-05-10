@@ -35,4 +35,4 @@ class Assignment(Node):
                and self.expression == other.expression
 
     def accept(self, visitor):
-        visitor.visitAssignment()
+        visitor.visitAssignment(self)

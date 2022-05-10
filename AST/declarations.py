@@ -35,3 +35,6 @@ class Declarations(Node):
 
     def accept(self, visitor):
         visitor.visitDeclarations()
+
+    def get_declarations(self):
+        return self.declarations

@@ -4,25 +4,34 @@ This file contains the enumerations of operators.
 """
 
 import enum
+from AST.node import Node
 
 
-class AddOp(enum.Enum):
+class AddOp(Node, enum.Enum):
     """
     Enumeration of addition operators:
 
     ADD: +
     SUB: -
     """
+
+    def accept(self, visitor):
+        return visitor.visit(self)
+
     ADD = 1
     SUB = 2
 
 
-class EquOp(enum.Enum):
+class EquOp(Node, enum.Enum):
     """
     Enumeration of the equality operators.
     equal: ==
     unequal: !=
     """
+
+    def accept(self, visitor):
+        return visitor.visit(self)
+
     equal = 1
     unequal = 2
 
@@ -35,6 +44,10 @@ class UnaryOp(enum.Enum):
 
     UnaryOp = - | !
     """
+
+    def accept(self, visitor):
+        return visitor.visit(self)
+
     NEG = 1
     INV = 2
 
@@ -47,6 +60,10 @@ class RelOp(enum.Enum):
     SUPEQ: >=
     INFEQ: <=
     """
+
+    def accept(self, visitor):
+        return visitor.visit(self)
+
     INF = 1
     SUP = 2
     SUPEQ = 3
@@ -61,6 +78,10 @@ class MulOp(enum.Enum):
 
     MulOp = * | / | %
     """
+
+    def accept(self, visitor):
+        return visitor.visit(self)
+
     MUL = 1
     DIV = 2
     MOD = 3

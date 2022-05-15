@@ -36,6 +36,11 @@ class Term(Node):
     def accept(self, visitor):
         visitor.visitTerm(self)
 
+    def get_factors(self):
+        return self.factors
+
+    def get_operators(self):
+        return self.operators
 
 
 

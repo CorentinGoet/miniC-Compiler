@@ -18,7 +18,7 @@ def main():
     """
 
     cli = CLI()
-    file, action = cli.process_args(sys.argv)
+    action, file = cli.process_args(sys.argv)
     src = open(file, "r").read()
     lexer = Lexer()
     parser = Parser()
@@ -49,10 +49,12 @@ def main():
         sys.exit(1)
 
     # Visitor
+    visitor.visit(parser.ast)
     try:
-        visitor.visit(parser.ast)
+        pass
     except Exception as e:
         print(f"Error during visitor: {e}")
+        print(parser.ast)
 
 
 if __name__ == '__main__':

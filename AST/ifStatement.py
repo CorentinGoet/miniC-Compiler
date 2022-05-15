@@ -16,7 +16,7 @@ class IfStatement(Node):
     IfStatement = if (Expression) Statement [else Statement]
     """
 
-    def __init__(self, expression: Expression = None, trueStatement: Statement = None, falseStatement: Statement =None):
+    def __init__(self, expression: Expression = None, trueStatement: Statement = None, falseStatement: Statement = None):
         """
         Constructor for the If statement node.
 

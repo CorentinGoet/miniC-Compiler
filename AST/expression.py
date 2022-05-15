@@ -31,3 +31,6 @@ class Expression(Node):
 
     def accept(self, visitor):
         visitor.visitExpression(self)
+
+    def get_conjunctions(self):
+        return self.conjunctions

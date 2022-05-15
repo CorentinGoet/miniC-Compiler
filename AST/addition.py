@@ -35,3 +35,9 @@ class Addition(Node):
     def accept(self, visitor):
         visitor.visitAddition(self)
 
+    def get_terms(self):
+        return self.terms
+
+    def get_operators(self):
+        return self.operators
+

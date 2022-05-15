@@ -4,6 +4,7 @@
 Python CLI interface for the project.
 """
 import sys
+from actions import Actions
 
 
 class CLI:
@@ -64,12 +65,12 @@ class CLI:
             print(f"File not found: {file}")
             sys.exit(1)
 
-        if action not in ["compile", "pretty-print"]:
-            print(f"Invalid action: {action}")
-            self.display_usage()
-            sys.exit(1)
+        if action == "pretty-print":
+            return Actions.PRETTY_PRINT, file
 
-        return action, file
+        if action == "compile":
+            return Actions.COMPILE, file
+
 
 
 if __name__ == "__main__":

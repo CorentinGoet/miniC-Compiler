@@ -16,6 +16,7 @@ from AST.factor import Factor
 from AST.identifier import Identifier
 from AST.ifStatement import IfStatement
 from AST.literal import Literal
+from AST.node import Node
 from AST.operators import AddOp, MulOp, RelOp, UnaryOp, EquOp
 from AST.primary import Primary
 from AST.program import Program

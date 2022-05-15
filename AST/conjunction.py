@@ -32,5 +32,6 @@ class Conjunction(Node):
     def accept(self, visitor):
         visitor.visitConjunction(self)
 
-
+    def get_equalities(self):
+        return self.equalities
 

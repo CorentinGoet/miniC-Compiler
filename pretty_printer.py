@@ -18,11 +18,11 @@ class PrettyPrinter(Visitor):
         """
         pass
 
-    def visit(self):
+    def visit(self, node):
         """
         Visit the AST to print the source code.
         """
-        pass
+        super().visit(node)
 
 
 if __name__ == '__main__':

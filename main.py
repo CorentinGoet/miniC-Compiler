@@ -4,7 +4,7 @@
 """
 import enum
 from lexer import Lexer
-from parser import Parser
+from parser.parser import Parser
 from CLIinterface import CLI
 import sys
 import time
@@ -25,7 +25,7 @@ def main():
 
     # Lexing
     try:
-        lexer.tokenize(src);
+        lexer.tokenize(src)
     except Exception as e:
         print(f"Error during lexing: {e}")
         sys.exit(1)
@@ -49,9 +49,9 @@ def main():
         sys.exit(1)
 
     # Visitor
-    visitor.visit(parser.ast)
+
     try:
-        pass
+        visitor.visit(parser.ast)
     except Exception as e:
         print(f"Error during visitor: {e}")
         print(parser.ast)

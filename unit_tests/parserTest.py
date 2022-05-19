@@ -5,7 +5,7 @@
 import unittest
 
 from AST import *
-from parser import Parser
+from parser import *
 from lexem import Lexem, LexemTag
 from lexer import Lexer
 

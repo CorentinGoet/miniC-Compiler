@@ -7,7 +7,7 @@ from lexer_pkg.lexer import Lexer
 from lexer_pkg.lexem import Lexem, LexemTag
 
 
-class testLexer(unittest.TestCase):
+class TestLexer(unittest.TestCase):
     """
     Test class for the Lexer.
 

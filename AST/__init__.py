@@ -26,4 +26,7 @@ from AST.statements import Statements
 from AST.term import Term
 from AST.type import Type, Types
 from AST.whileStatement import WhileStatement
-
+from AST.int import Int
+from AST.boolean import Boolean
+from AST.float import Float
+from AST.char import Char

@@ -16,10 +16,10 @@ class AddOp(Node, enum.Enum):
     """
 
     def accept(self, visitor):
-        return visitor.visit(self)
+        return visitor.visitOperator(self)
 
-    ADD = 1
-    SUB = 2
+    ADD = "+"
+    SUB = "-"
 
 
 class EquOp(Node, enum.Enum):
@@ -30,10 +30,10 @@ class EquOp(Node, enum.Enum):
     """
 
     def accept(self, visitor):
-        return visitor.visit(self)
+        return visitor.visitOperator(self)
 
-    equal = 1
-    unequal = 2
+    equal = "=="
+    unequal = "!="
 
 
 class UnaryOp(enum.Enum):
@@ -46,10 +46,10 @@ class UnaryOp(enum.Enum):
     """
 
     def accept(self, visitor):
-        return visitor.visit(self)
+        return visitor.visitOperator(self)
 
-    NEG = 1
-    INV = 2
+    NEG = "-"
+    INV = "!"
 
 
 class RelOp(enum.Enum):
@@ -62,12 +62,12 @@ class RelOp(enum.Enum):
     """
 
     def accept(self, visitor):
-        return visitor.visit(self)
+        return visitor.visitOperator(self)
 
-    INF = 1
-    SUP = 2
-    SUPEQ = 3
-    INFEQ = 4
+    INF = "<"
+    SUP = ">"
+    SUPEQ = ">="
+    INFEQ = "<="
 
 
 class MulOp(enum.Enum):
@@ -80,8 +80,8 @@ class MulOp(enum.Enum):
     """
 
     def accept(self, visitor):
-        return visitor.visit(self)
+        return visitor.visitOperator(self)
 
-    MUL = 1
-    DIV = 2
-    MOD = 3
+    MUL = "*"
+    DIV = "/"
+    MOD = "%"

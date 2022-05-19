@@ -2,7 +2,7 @@
 @author Corentin Goetghebeur (github.com/CorentinGoet)
 """
 
-from lexem import Lexem, LexemTag
+from lexer_pkg.lexem import Lexem, LexemTag
 import re
 
 

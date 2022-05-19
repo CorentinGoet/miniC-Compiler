@@ -34,7 +34,7 @@ class Statements(Node):
         return False
 
     def accept(self, visitor):
-        visitor.visitStatements()
+        visitor.visitStatements(self)
 
     def get_statements(self):
         return self.statements

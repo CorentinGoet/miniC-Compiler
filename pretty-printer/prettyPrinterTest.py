@@ -4,7 +4,7 @@ from parser_pkg.parser import Parser
 from pretty_printer import PrettyPrinter
 
 
-class MyTestCase(unittest.TestCase):
+class PrettyPrintertest(unittest.TestCase):
 
     def testTest(self):
         source = "int main() { int a; a = 1;}"
@@ -13,6 +13,7 @@ class MyTestCase(unittest.TestCase):
         parser = Parser()
         parser.parse(lexer.lexems)
         prettyPrinter = PrettyPrinter()
+        print(parser.ast)
         prettyPrinter.visit(parser.ast)
         print(prettyPrinter.clean_source)
 

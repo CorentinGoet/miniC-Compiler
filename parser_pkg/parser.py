@@ -249,9 +249,11 @@ class Parser:
         Parses the equop lexem.
         """
         if self.peek().tag == LexemTag.EQUAL:
-            return self.expect(LexemTag.EQUAL)
+            self.expect(LexemTag.EQUAL)
+            return EquOp(EquOp.equal)
         elif self.peek().tag == LexemTag.NOT_EQUAL:
-            return self.expect(LexemTag.NOT_EQUAL)
+            self.expect(LexemTag.NOT_EQUAL)
+            return EquOp(EquOp.unequal)
         else:
             raise ValueError("{} is not a valid equality operator.".format(self.peek()))
 
@@ -263,7 +265,7 @@ class Parser:
         """
         addition = self.parse_addition()
         if self.peek().tag in [LexemTag.LESS, LexemTag.LESS_EQUAL, LexemTag.GREATER, LexemTag.GREATER_EQUAL]:
-            rel_op = self.parse_relop().value
+            rel_op = self.parse_relop()
             addition2 = self.parse_addition()
             return Relation(addition, rel_op, addition2)
         return Relation(addition)
@@ -273,13 +275,17 @@ class Parser:
         Parses a relop lexem.
         """
         if self.peek().tag == LexemTag.LESS:
-            return self.expect(LexemTag.LESS)
+            self.expect(LexemTag.LESS)
+            return RelOp(RelOp.INF)
         elif self.peek().tag == LexemTag.LESS_EQUAL:
-            return self.expect(LexemTag.LESS_EQUAL)
+            self.expect(LexemTag.LESS_EQUAL)
+            return RelOp(RelOp.INFEQ)
         elif self.peek().tag == LexemTag.GREATER:
-            return self.expect(LexemTag.GREATER)
+            self.expect(LexemTag.GREATER)
+            return RelOp(RelOp.SUP)
         elif self.peek().tag == LexemTag.GREATER_EQUAL:
-            return self.expect(LexemTag.GREATER_EQUAL)
+            self.expect(LexemTag.GREATER_EQUAL)
+            return RelOp(RelOp.SUPEQ)
         else:
             raise ValueError("{} is not a valid relation operator.".format(self.peek()))
 
@@ -293,7 +299,7 @@ class Parser:
         operators = []
         terms.append(self.parse_term())
         while self.peek().tag == LexemTag.ADDITION or self.peek().tag == LexemTag.SUBTRACTION:
-            operators.append(self.parse_addop().value)
+            operators.append(self.parse_addop())
             terms.append(self.parse_term())
         return Addition(terms)
         
@@ -302,9 +308,11 @@ class Parser:
         Parses the addop lexem.
         """
         if self.peek().tag == LexemTag.ADDITION:
-            return self.expect(LexemTag.ADDITION)
+            self.expect(LexemTag.ADDITION)
+            return AddOp(AddOp.ADD)
         elif self.peek().tag == LexemTag.SUBTRACTION:
-            return self.expect(LexemTag.SUBTRACTION)
+            self.expect(LexemTag.SUBTRACTION)
+            return AddOp(AddOp.SUB)
         else:
             raise ValueError("{} is not a valid addition operator.".format(self.peek()))
 
@@ -318,7 +326,7 @@ class Parser:
         operators = []
         factors.append(self.parse_factor())
         while self.peek().tag in [LexemTag.MULTIPLICATION, LexemTag.DIVISION, LexemTag.MODULO]:
-            operators.append(self.parse_mulop().value)
+            operators.append(self.parse_mulop())
             factors.append(self.parse_factor())
         return Term(factors, operators)
     
@@ -327,11 +335,14 @@ class Parser:
         Parses the mulop lexem.
         """
         if self.peek().tag == LexemTag.MULTIPLICATION:
-            return self.expect(LexemTag.MULTIPLICATION)
+            self.expect(LexemTag.MULTIPLICATION)
+            return MulOp(MulOp.MUL)
         elif self.peek().tag == LexemTag.DIVISION:
-            return self.expect(LexemTag.DIVISION)
+            self.expect(LexemTag.DIVISION)
+            return MulOp(MulOp.DIV)
         elif self.peek().tag == LexemTag.MODULO:
-            return self.expect(LexemTag.MODULO)
+            self.expect(LexemTag.MODULO)
+            return MulOp(MulOp.MOD)
         else:
             raise ValueError("{} is not a valid multiplication operator.".format(self.peek()))
 
@@ -344,20 +355,20 @@ class Parser:
         if self.peek().tag == LexemTag.SUBTRACTION or self.peek().tag == LexemTag.NOT:
             unary_op = self.parse_unary_op()
             primary = self.parse_primary()
-            return Factor(unary_op, primary)
+            return Factor(primary, unary_op)
         primary = self.parse_primary()
-        return Factor(None, primary)
-
-
+        return Factor(primary, None)
 
     def parse_unary_op(self):
         """
         Parses the unary op lexem.
         """
         if self.peek().tag == LexemTag.SUBTRACTION:
-            return self.expect(LexemTag.SUBTRACTION)
+            self.expect(LexemTag.SUBTRACTION)
+            return UnaryOp(UnaryOp.NEG)
         elif self.peek().tag == LexemTag.NOT:
-            return self.expect(LexemTag.NOT)
+            self.expect(LexemTag.NOT)
+            return UnaryOp(UnaryOp.INV)
         else:
             raise ValueError("{} is not a valid unary operator.".format(self.peek()))
 
@@ -379,13 +390,13 @@ class Parser:
         Parses the literal lexem.
         """
         if self.peek().tag == LexemTag.INTEGER:
-            return self.expect(LexemTag.INTEGER).value
+            return Int(self.expect(LexemTag.INTEGER).value)
         elif self.peek().tag == LexemTag.FLOAT:
-            return self.expect(LexemTag.FLOAT).value
+            return Float(self.expect(LexemTag.FLOAT).value)
         elif self.peek().tag == LexemTag.CHAR:
-            return self.expect(LexemTag.CHAR).value
+            return Char(self.expect(LexemTag.CHAR).value)
         elif self.peek().tag == LexemTag.BOOL:
-            return self.expect(LexemTag.BOOL).value
+            return Boolean(self.expect(LexemTag.BOOL).value)
         else:
             raise ValueError("{} is not a valid literal.".format(self.peek()))
 

@@ -4,9 +4,9 @@
 """
 from lexer_pkg.lexer import Lexer
 from parser_pkg.parser import Parser
-from CLIinterface import CLI
+from CLI.CLIinterface import CLI
 import sys
-from actions import Actions
+from CLI.actions import Actions
 from pretty_printer import PrettyPrinter
 
 

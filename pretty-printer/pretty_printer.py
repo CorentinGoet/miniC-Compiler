@@ -33,8 +33,9 @@ class PrettyPrinter(Visitor):
         """
         self.clean_source += "int main() {\n"
         self.context.increase_tabs()
-        self.visit(program.declarations.accept(self))
-        self.visit(program.statements.accept(self))
+        program.declarations.accept(self)
+        self.clean_source += "\n"
+        program.statements.accept(self)
         self.context.decrease_tabs()
         self.clean_source += "}\n"
 
@@ -45,15 +46,23 @@ class PrettyPrinter(Visitor):
         """
         for declaration in declarations.declarations:
             self.visitDeclaration(declaration)
-            self.clean_source += "\n"
+            if declaration is not declarations.declarations[-1]:
+                self.clean_source += "\n"
 
     def visitDeclaration(self, declaration):
         """
         Visit and pretty-print the declaration node.
         :param declaration: declaration node
         """
-        self.clean_source += self.context.get_tabs() * " " + declaration.type.accept(self)\
-                             + " " + declaration.identifier.accept(self) + ";\n"
+        self.clean_source += self.context.get_tabs() * " "
+        declaration.type.accept(self)
+        self.clean_source += " "
+        declaration.identifier[0].accept(self)
+        if len(declaration.identifier) > 1:
+            for id in declaration.identifier[1:]:
+                self.clean_source += ", "
+                id.accept(self)
+        self.clean_source += ";\n"
 
     def visitStatements(self, statements):
         """
@@ -61,8 +70,10 @@ class PrettyPrinter(Visitor):
         :param statements: statements node
         """
         for statement in statements.statements:
+            self.clean_source += self.context.get_tabs() * " "
             statement.accept(self)
-            self.clean_source += "\n"
+            if statement is not statements.statements[-1]:
+                self.clean_source += "\n"
 
     def visitStatement(self, statement):
         """
@@ -124,9 +135,9 @@ class PrettyPrinter(Visitor):
         Visit and pretty-print the conjunction node.
         :param conjunction: conjunction node
         """
-        for disjunction in conjunction.disjunctions:
+        for disjunction in conjunction.equalities:
             disjunction.accept(self)
-            if disjunction is not conjunction.disjunctions[-1]:
+            if disjunction is not conjunction.equalities[-1]:
                 self.clean_source += " || "
 
     def visitEquality(self, equality):
@@ -134,16 +145,24 @@ class PrettyPrinter(Visitor):
         Visit and pretty-print the equality node.
         :param equality: equality node
         """
-        self.clean_source += equality.relation1.accept(self) + " " + equality.equOp.accept(self) \
-                             + " " + equality.relation2.accept(self)
+        equality.relation1.accept(self)
+        if equality.relation2 is not None:
+            self.clean_source += " "
+            equality.equOp.accept(self)
+            self.clean_source += " "
+            equality.relation2.accept(self)
 
     def visitRelation(self, relation):
         """
         Visit and pretty-print the relation node.
         :param relation: relation node
         """
-        self.clean_source += relation.addition1.accept(self) + " " + relation.relOp.accept(self) \
-                             + " " + relation.addition2.accept(self)
+        relation.addition1.accept(self)
+        self.clean_source += " "
+        if relation.relOp is not None:
+            relation.relOp.accept(self)
+            self.clean_source += " "
+            relation.addition2.accept(self)
 
     def visitAddition(self, addition):
         """
@@ -162,11 +181,23 @@ class PrettyPrinter(Visitor):
         Visit and pretty-print the term node.
         :param term: term node
         """
-        self.clean_source += term.factor1.accept(self)
+        term.factors[0].accept(self)
         if len(term.factors) > 1:
             for i in range(1, len(term.factors)):
-                self.clean_source += " " + term.operators[i].accept(self) + " "
-                self.clean_source += term.factors[i].accept(self)
+                self.clean_source += " "
+                term.operators[i].accept(self)
+                self.clean_source += " "
+                term.factors[i].accept(self)
+
+    def visitAssignment(self, assignment):
+        """
+        Visit and pretty-print the assignment node.
+        :param assignment: assignment node
+        """
+        assignment.identifier.accept(self)
+        self.clean_source += " = "
+        assignment.expression.accept(self)
+        self.clean_source += ";\n"
 
     def visitFactor(self, factor):
         """
@@ -204,7 +235,49 @@ class PrettyPrinter(Visitor):
         Visit and pretty-print the literal node.
         :param literal: literal node
         """
-        self.clean_source += literal.value
+        self.clean_source += literal.name
+
+    def visitType(self, type):
+        """
+        Visit and pretty-print the type node.
+        :param type: type node
+        """
+        self.clean_source += type.type
+
+    def visitOperator(self, operator):
+        """
+        Visit and pretty-print the operator node (relOp, addOp, equOp, unaryOp, mulOp).
+        :param operator: operator node
+        """
+        self.clean_source += operator.operator
+
+    def visitInt(self, int):
+        """
+        Visit and pretty-print the int node.
+        :param int: int node
+        """
+        self.clean_source += str(int.value)
+
+    def visitFloat(self, float):
+        """
+        Visit and pretty-print the float node.
+        :param float: float node
+        """
+        self.clean_source += str(float.value)
+
+    def visitChar(self, char):
+        """
+        Visit and pretty-print the char node.
+        :param char: char node
+        """
+        self.clean_source += char.value
+
+    def visitBoolean(self, boolean):
+        """
+        Visit and pretty-print the boolean node.
+        :param boolean: boolean node
+        """
+        self.clean_source += str(boolean.value)
 
 class Context:
     """
@@ -222,6 +295,8 @@ class Context:
 
     def get_tabs(self):
         return self.nb_tabs
+
+
 
 
 if __name__ == '__main__':

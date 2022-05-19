@@ -14,13 +14,14 @@ class Primary(Node):
     Primary = Identifier [ [Expression] ] | Literal | ( Expression ) | Type (Expression)
     """
 
-    def __init__(self, sonNode):
+    def __init__(self, sonNode: Node):
         """
         Constructor for the primary node.
 
         :param sonNode: Identifier or Literal or (Expression) or Type + Expression
         """
         self.sonNode = sonNode
+        print(self)
 
     def __str__(self):
         return "Primary(" + str(self.sonNode) + ")"

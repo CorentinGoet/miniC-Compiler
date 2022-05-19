@@ -10,7 +10,7 @@ from actions import Actions
 class CLI:
 
     def __init__(self):
-        f = open("resources/title.txt", "r")
+        f = open("../resources/title.txt", "r")
         self.title = f.read()
         f.close()
 

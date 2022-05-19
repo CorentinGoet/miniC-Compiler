@@ -63,7 +63,7 @@ Char            = ' ASCII char '    // Where ASCII char is the set of ASCII Char
 
 ## Lexer
 The lexer is the part of the compiler responsible for breaking the source code into lexems.
-The class for the lexer is `Lexer`, found in the [lexer.py](/lexer.py) file, it has one main function `tokenize`, which
+The class for the lexer is `Lexer`, found in the [lexer.py](/lexer_pkg/lexer.py) file, it has one main function `tokenize`, which
 takes a string as input and returns a list of tokens, by matching the lexems with the regexes.
 
 For example, the following mini-c source code:
@@ -86,15 +86,17 @@ Lexem(value: LexemTag.R_BRACE, type: }, position: [3, 0])
 ```
 
 with the following instructions:
+
 ```python
-from lexer import Lexer
+from lexer_pkg.lexer import Lexer
+
 lexer = Lexer()
 lexer.tokenize("int main(){int a;}")
 print(lexer)
 ```
 
 ### Tests
-The lexer is tested in the [lexerTest.py](unit_tests/lexerTest.py) file. Each syntax possibility is tested with a 
+The lexer is tested in the [lexerTest.py](lexer_pkg/testLexer.py) file. Each syntax possibility is tested with a 
 separate method. This test file gives a test coverage of 100% for the Lexer and Lexem classes.
 
 ## Parser

@@ -1,14 +1,13 @@
 """
 @author Corentin Goetghebeur (github.com/CorentinGoet)
 """
-import sys
-from lexem import LexemTag
+from lexer_pkg.lexem import LexemTag
 from AST import *
 
 
 class Parser:
     """
-    The parser takes the lexems from the lexer and builds the AST.
+    The parser_pkg takes the lexems from the lexer and builds the AST.
     """
 
     def __init__(self):
@@ -78,7 +77,7 @@ class Parser:
             try:
                 declarations.append(self.parse_declaration())
             except TypeError:
-                # The parser found a non declaration lexem, so we stop parsing declarations
+                # The parser_pkg found a non declaration lexem, so we stop parsing declarations
                 break
             except ValueError:
                 # No more lexems to peek

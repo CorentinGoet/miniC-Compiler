@@ -2,12 +2,10 @@
 """
 @author Corentin Goetghebeur (github.com/CorentinGoet).
 """
-import enum
-from lexer import Lexer
-from parser.parser import Parser
+from lexer_pkg.lexer import Lexer
+from parser_pkg.parser import Parser
 from CLIinterface import CLI
 import sys
-import time
 from actions import Actions
 from pretty_printer import PrettyPrinter
 

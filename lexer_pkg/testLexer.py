@@ -3,11 +3,11 @@
 """
 
 import unittest
-from lexer import Lexer
-from lexem import Lexem, LexemTag
+from lexer_pkg.lexer import Lexer
+from lexer_pkg.lexem import Lexem, LexemTag
 
 
-class LexerTest(unittest.TestCase):
+class testLexer(unittest.TestCase):
     """
     Test class for the Lexer.
 

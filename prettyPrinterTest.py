@@ -1,6 +1,6 @@
 import unittest
-from lexer import Lexer
-from parser.parser import Parser
+from lexer_pkg.lexer import Lexer
+from parser_pkg.parser import Parser
 from pretty_printer import PrettyPrinter
 
 

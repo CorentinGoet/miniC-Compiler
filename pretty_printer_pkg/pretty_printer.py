@@ -47,7 +47,6 @@ class PrettyPrinter(Visitor):
         for declaration in declarations.declarations:
             self.visitDeclaration(declaration)
 
-
     def visitDeclaration(self, declaration):
         """
         Visit and pretty-print the declaration node.
@@ -72,8 +71,7 @@ class PrettyPrinter(Visitor):
         """
         for statement in statements.statements:
             statement.accept(self)
-            if statement is not statements.statements[-1]:
-                self.clean_source += "\n"
+            self.clean_source += "\n"
 
     def visitStatement(self, statement):
         """
@@ -102,14 +100,16 @@ class PrettyPrinter(Visitor):
         self.context.increase_tabs()
         if_statement.trueStatement.accept(self)
         self.context.decrease_tabs()
+        self.clean_source += '\n'
 
         if if_statement.falseStatement is not None:
             self.clean_source += self.context.get_tabs() * " " + "} else {\n"
             self.context.increase_tabs()
             if_statement.falseStatement.accept(self)
             self.context.decrease_tabs()
+            self.clean_source += '\n'
 
-        self.clean_source += self.context.get_tabs() * " " + "}\n"
+        self.clean_source += self.context.get_tabs() * " " + "}"
 
     def visitWhileStatement(self, while_statement):
         """
@@ -178,8 +178,10 @@ class PrettyPrinter(Visitor):
 
         if len(addition.terms) > 1:
             for i in range(1, len(addition.terms)):
-                self.clean_source += " " + addition.operators[i].accept(self) + " "
-                self.clean_source += addition.terms[i].accept(self)
+                self.clean_source += " "
+                addition.operators[i-1].accept(self)
+                self.clean_source += " "
+                addition.terms[i].accept(self)
 
     def visitTerm(self, term):
         """
@@ -202,7 +204,7 @@ class PrettyPrinter(Visitor):
         assignment.identifier.accept(self)
         self.clean_source += " = "
         assignment.expression.accept(self)
-        self.clean_source += ";\n"
+        self.clean_source += ";"
 
     def visitFactor(self, factor):
         """

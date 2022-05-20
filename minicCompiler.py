@@ -17,16 +17,18 @@ def main():
     """
 
     cli = CLI()
-    action, file = cli.process_args(sys.argv)
+    action, file, output = cli.process_args(sys.argv)
     lexer = Lexer()
     parser = Parser()
-
 
     if action == Actions.HELP:
         cli.display_usage()
         sys.exit(0)
 
     src = open(file, "r").read()
+    if output is None:
+        output = "pretty.minic"
+    out = open(output, "w")
 
     # Lexing
     try:
@@ -60,6 +62,11 @@ def main():
     except Exception as e:
         print(f"Error during visitor: {e}")
         print(parser.ast)
+
+    out.write(visitor.clean_source)
+    out.close()
+    print(visitor.clean_source)
+    print(f"Successfully wrote the file {output}")
 
 
 if __name__ == '__main__':

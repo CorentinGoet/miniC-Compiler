@@ -27,7 +27,7 @@ class CLI:
         :return: None
         """
         print("Usage:")
-        print("\tminic-compiler <action> [file]")
+        print("\tminic-compiler <action> [source file] [output file]")
         print("Actions:")
         print("\tcompile\t\t\tCompile a file to SIMJI assembly code. (not implemented yet)")
         print("\tpretty-print\tPretty print a mini-C program.")
@@ -70,10 +70,11 @@ class CLI:
                 self.display_usage()
                 sys.exit(1)
 
-            return action, None
+            return action, None, None
 
         action = args[1]
         file = args[2]
+        output = args[3] if len(args) > 3 else None
         try:
             f = open(file, "r")
             f.close()
@@ -82,7 +83,8 @@ class CLI:
             sys.exit(1)
 
         if action == "pretty-print":
-            return Actions.PRETTY_PRINT, file
+            return Actions.PRETTY_PRINT, file, output
 
         if action == "compile":
-            return Actions.COMPILE, file
+            print("Compilation not implemented yet.")
+            sys.exit(0)

@@ -56,6 +56,16 @@ class PrettyPrinterTest(unittest.TestCase):
         self.prettyPrinter.visit(self.parser.ast)
         self.assertEqual(pretty_source, self.prettyPrinter.clean_source)
 
+    def testPrettyPrintExamples(self):
+        f = open('test_resources/fibo.minic', 'r')
+        pretty_source = f.read()
+        f.close()
+
+        self.lexer.tokenize(pretty_source)
+        self.parser.parse(self.lexer.lexems)
+        self.prettyPrinter.visit(self.parser.ast)
+        self.assertEqual(pretty_source, self.prettyPrinter.clean_source)
+
 
 if __name__ == '__main__':
     unittest.main()

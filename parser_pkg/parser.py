@@ -189,7 +189,7 @@ class Parser:
         expression = self.parse_expression()
         self.expect(LexemTag.R_PARENTHESIS)
         self.expect(LexemTag.L_BRACE)
-        statement = self.parse_statement()
+        statement = self.parse_statements()
         self.expect(LexemTag.R_BRACE)
         return WhileStatement(expression, statement)
 
@@ -301,7 +301,7 @@ class Parser:
         while self.peek().tag == LexemTag.ADDITION or self.peek().tag == LexemTag.SUBTRACTION:
             operators.append(self.parse_addop())
             terms.append(self.parse_term())
-        return Addition(terms)
+        return Addition(terms, operators)
         
     def parse_addop(self):
         """

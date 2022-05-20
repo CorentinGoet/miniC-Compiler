@@ -1,0 +1,16 @@
+int main(){
+    int n;
+    int i;
+    int fiboN;
+    int fiboN1;
+
+    n = 0;
+    fiboN = 0;
+    fiboN1 = 1;
+
+    while (i < n){
+        fiboN = fiboN + fiboN1;
+        fiboN1 = fiboN - fiboN1;
+        i = i + 1;
+    }
+}

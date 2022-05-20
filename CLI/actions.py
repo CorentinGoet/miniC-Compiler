@@ -11,3 +11,5 @@ class Actions(enum.Enum):
     """
     PRETTY_PRINT = 1
     COMPILE = 2
+    TEST = 3
+    HELP = 4

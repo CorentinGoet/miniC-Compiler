@@ -4,16 +4,17 @@ MiniC-Compiler is a compiler for the mini-C programming language, a simplified v
 detailed in a further section). 
 
 In a future version, the miniC will be compiled to assembly code made to run on an instruction set simulator I designed in
-another project called [SIMJI](https://github.com/CorentinGoet/SIMJI).
+another project called [SIMJI](https://github.com/CorentinGoet/SIMJI). The pretty-printer is the only working part in
+the current version.
 
 ## Table of Contents
 1. [Context](#context)
-2. [Installation & Usage](#installation-&-usage)
+2. [Installation & Usage](#installation--usage)
 3. [Objective](#objective)
 4. [Mini-C Language](#mini-c-language)
 
 ## Context
-This project is made within a compilation course at [ENSTA Bretagne](https://www.ensta-bretagne.fr/fr) (Frenche graduate
+This project is made within a compilation course at [ENSTA Bretagne](https://www.ensta-bretagne.fr/fr) (French graduate
 engineering school). Because of this the main report detailing the project will be in French. However, most of the
 documentation and this readme will be in English.
 
@@ -52,8 +53,15 @@ To run the tests, you can use the following command:
 ./minicCompiler.py test
 ```
 
+You can find examples of mini-C programs in the `examples` folder.
 
-### Mini-C language
+## Future Upgrades
+
+In the current version, only the pretty-printer is working. The assembly code is not yet implemented.
+Arrays are not yet supported by any part of the compiler.
+
+
+## Mini-C language
 Mini-C has a syntax a little different from C, it is detailed in the 
 [EBNF](https://wikipedia.org/wiki/Extended_Backus-Naur_Form) code below:
 ```ebnf
@@ -123,10 +131,6 @@ lexer = Lexer()
 lexer.tokenize("int main(){int a;}")
 print(lexer)
 ```
-
-### Tests
-The lexer is tested in the [lexerTest.py](lexer_pkg/testLexer.py) file. Each syntax possibility is tested with a 
-separate method. This test file gives a test coverage of 100% for the Lexer and Lexem classes.
 
 ## Parser
 The parser is the part of the compiler responsible for turning the lexems into an AST.

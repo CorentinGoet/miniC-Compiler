@@ -4,13 +4,13 @@
 Python CLI interface for the project.
 """
 import sys
-from actions import Actions
+from CLI.actions import Actions
 
 
 class CLI:
 
     def __init__(self):
-        f = open("../resources/title.txt", "r")
+        f = open("resources/title.txt", "r")
         self.title = f.read()
         f.close()
 
@@ -27,10 +27,12 @@ class CLI:
         :return: None
         """
         print("Usage:")
-        print("\tminic-compiler <action> <file>")
+        print("\tminic-compiler <action> [file]")
         print("Actions:")
-        print("\tcompile\t\t\tCompile a file to SIMJI assembly code.")
+        print("\tcompile\t\t\tCompile a file to SIMJI assembly code. (not implemented yet)")
         print("\tpretty-print\tPretty print a mini-C program.")
+        print("\ttest\t\t\tRun the tests.")
+        print("\thelp\t\t\tDisplay this help.")
 
     def display_menu(self):
         """
@@ -50,11 +52,26 @@ class CLI:
         :param args: list of arguments
         :return: action, file
         """
-        if len(args) != 3:
+        if len(args) < 2:
             self.display_title()
             self.display_menu()
             self.display_usage()
             sys.exit(1)
+
+        if len(args) == 2:
+            if args[1] == "help":
+                action = Actions.HELP
+
+            elif args[1] == "test":
+                action = Actions.TEST
+
+            else:
+                self.display_title()
+                self.display_menu()
+                self.display_usage()
+                sys.exit(1)
+
+            return action, None
 
         action = args[1]
         file = args[2]
@@ -70,10 +87,3 @@ class CLI:
 
         if action == "compile":
             return Actions.COMPILE, file
-
-
-
-if __name__ == "__main__":
-    CLI().display_title()
-    CLI().display_menu()
-    CLI().display_usage()

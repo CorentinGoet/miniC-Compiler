@@ -2,7 +2,7 @@
 @author Corentin Goetghebeur (github.com/CorentinGoet)
 """
 
-from visitor import Visitor
+from pretty_printer_pkg.visitor import Visitor
 
 
 class PrettyPrinter(Visitor):

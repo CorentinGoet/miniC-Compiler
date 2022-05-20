@@ -31,7 +31,6 @@ class CLI:
         print("Actions:")
         print("\tcompile\t\t\tCompile a file to SIMJI assembly code. (not implemented yet)")
         print("\tpretty-print\tPretty print a mini-C program.")
-        print("\ttest\t\t\tRun the tests.")
         print("\thelp\t\t\tDisplay this help.")
 
     def display_menu(self):

@@ -26,24 +26,6 @@ def main():
         cli.display_usage()
         sys.exit(0)
 
-    if action == Actions.TEST:
-        # tests for the lexer
-        print("#" * 10)
-        print("Lexer tests")
-        os.system("python3 lexer_pkg/testLexer.py")
-
-        # tests for the parser
-        print("#" * 10)
-        print("Parser tests")
-        os.system("python3 parser_pkg/parserTest.py")
-
-        # tests for the pretty printer
-        print("#" * 10)
-        print("Pretty printer tests")
-        os.system("python3 pretty_printer_pkg/prettyPrinterTest.py")
-        print("#" * 10)
-        sys.exit(0)
-
     src = open(file, "r").read()
 
     # Lexing

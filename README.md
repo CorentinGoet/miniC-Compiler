@@ -11,7 +11,10 @@ the current version.
 1. [Context](#context)
 2. [Installation & Usage](#installation--usage)
 3. [Objective](#objective)
-4. [Mini-C Language](#mini-c-language)
+4. [Tests](#tests)
+5. [Future Upgrades](#future-upgrades)
+6. [Structure](#structure)
+7. [Mini-C Language](#mini-c-language)
 
 ## Context
 This project is made within a compilation course at [ENSTA Bretagne](https://www.ensta-bretagne.fr/fr) (French graduate
@@ -47,19 +50,25 @@ You can also use the following command to run the project without installation:
 python3 minicCompiler.py pretty-print <file.minic>
 ```
 
-To run the tests, you can use the following command:
-
-```bash
-./minicCompiler.py test
-```
 
 You can find examples of mini-C programs in the `examples` folder.
+
+## Tests
+
+Each package has its own unit test file.
 
 ## Future Upgrades
 
 In the current version, only the pretty-printer is working. The assembly code is not yet implemented.
 Arrays are not yet supported by any part of the compiler.
 
+## Structure
+Each element of the project has its own package:
+- the lexer in the lexer_pkg package
+- the parser in the parser_pkg package
+- the AST in the AST package
+- the pretty-printer visitor in the pretty_printer_pkg package
+- the command line interface in the CLI package
 
 ## Mini-C language
 Mini-C has a syntax a little different from C, it is detailed in the 
@@ -97,42 +106,4 @@ Boolean         = true | false
 Float           = Integer.Integer
 Char            = ' ASCII char '    // Where ASCII char is the set of ASCII Characters
 ```
-
-## Lexer
-The lexer is the part of the compiler responsible for breaking the source code into lexems.
-The class for the lexer is `Lexer`, found in the [lexer.py](/lexer_pkg/lexer.py) file, it has one main function `tokenize`, which
-takes a string as input and returns a list of tokens, by matching the lexems with the regexes.
-
-For example, the following mini-c source code:
-```mini-c
-int main(){
-    int a;
-}
-```
-would be tokenized as:
-```python
-Lexem(value: LexemTag.TYPE, type: int , position: [1, 0])
-Lexem(value: LexemTag.MAIN, type: main, position: [1, 4])
-Lexem(value: LexemTag.L_PARENTHESIS, type: (, position: [1, 8])
-Lexem(value: LexemTag.R_PARENTHESIS, type: ), position: [1, 9])
-Lexem(value: LexemTag.L_BRACE, type: {, position: [1, 10])
-Lexem(value: LexemTag.TYPE, type: int , position: [2, 4])
-Lexem(value: LexemTag.IDENTIFIER, type: a, position: [2, 8])
-Lexem(value: LexemTag.TERMINATOR, type: ;, position: [2, 9])
-Lexem(value: LexemTag.R_BRACE, type: }, position: [3, 0])
-```
-
-with the following instructions:
-
-```python
-from lexer_pkg.lexer import Lexer
-
-lexer = Lexer()
-lexer.tokenize("int main(){int a;}")
-print(lexer)
-```
-
-## Parser
-The parser is the part of the compiler responsible for turning the lexems into an AST.
-It takes the list of lexems given by the lexer and builds the AST from the classes found in the AST package.
 

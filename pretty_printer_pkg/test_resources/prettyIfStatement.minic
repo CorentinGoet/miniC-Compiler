@@ -1,0 +1,9 @@
+int main() {
+    int a, b;
+
+    if (a == b) {
+        c = d;
+    } else {
+        d = e;
+    }
+}

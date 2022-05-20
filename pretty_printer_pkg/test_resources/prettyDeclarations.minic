@@ -1,0 +1,7 @@
+int main() {
+    int a, b, c;
+    char d;
+    float e, f;
+    bool g, h;
+
+}

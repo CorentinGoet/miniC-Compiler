@@ -21,7 +21,6 @@ class Primary(Node):
         :param sonNode: Identifier or Literal or (Expression) or Type + Expression
         """
         self.sonNode = sonNode
-        print(self)
 
     def __str__(self):
         return "Primary(" + str(self.sonNode) + ")"

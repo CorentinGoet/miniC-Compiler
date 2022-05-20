@@ -1,15 +1,16 @@
 # Mini-C Compiler
 
-**This project is in development, the first version is not released yet.**
-
 MiniC-Compiler is a compiler for the mini-C programming language, a simplified version of C (the grammar for it is
-detailed in a further section). The compiled program is made to run on an instruction set simulator I designed in
+detailed in a further section). 
+
+In a future version, the miniC will be compiled to assembly code made to run on an instruction set simulator I designed in
 another project called [SIMJI](https://github.com/CorentinGoet/SIMJI).
 
 ## Table of Contents
 1. [Context](#context)
-2. [Objective](#objective)
-3. [Mini-C Language](#mini-c-language)
+2. [Installation & Usage](#installation-&-usage)
+3. [Objective](#objective)
+4. [Mini-C Language](#mini-c-language)
 
 ## Context
 This project is made within a compilation course at [ENSTA Bretagne](https://www.ensta-bretagne.fr/fr) (Frenche graduate
@@ -17,12 +18,40 @@ engineering school). Because of this the main report detailing the project will 
 documentation and this readme will be in English.
 
 ## Objective
+
 The objective for this project is to design a compiler for the mini-C language containing the following elements:
 - Lexer
 - Parser
 - AST (Abstract Syntax Tree / Arbre de Syntaxe Abstraite)
 - Visitor Pattern
 - Pretty-printer
+
+## Installation & Usage
+
+You can use the following command to install the project:
+
+```bash
+chmod +x minicCompiler.py
+```
+
+Then you can use the following command to run the project:
+
+```bash
+./minicCompiler.py pretty-print <file.minic>
+```
+
+You can also use the following command to run the project without installation:
+
+```bash
+python3 minicCompiler.py pretty-print <file.minic>
+```
+
+To run the tests, you can use the following command:
+
+```bash
+./minicCompiler.py test
+```
+
 
 ### Mini-C language
 Mini-C has a syntax a little different from C, it is detailed in the 

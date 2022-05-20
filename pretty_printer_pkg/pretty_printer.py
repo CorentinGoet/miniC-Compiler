@@ -46,14 +46,15 @@ class PrettyPrinter(Visitor):
         """
         for declaration in declarations.declarations:
             self.visitDeclaration(declaration)
-            if declaration is not declarations.declarations[-1]:
-                self.clean_source += "\n"
+
 
     def visitDeclaration(self, declaration):
         """
         Visit and pretty-print the declaration node.
         :param declaration: declaration node
         """
+        if declaration is None:
+            return
         self.clean_source += self.context.get_tabs() * " "
         declaration.type.accept(self)
         self.clean_source += " "
@@ -70,7 +71,6 @@ class PrettyPrinter(Visitor):
         :param statements: statements node
         """
         for statement in statements.statements:
-            self.clean_source += self.context.get_tabs() * " "
             statement.accept(self)
             if statement is not statements.statements[-1]:
                 self.clean_source += "\n"
@@ -80,6 +80,7 @@ class PrettyPrinter(Visitor):
         Visit and pretty-print the statement node.
         :param statement: statement node
         """
+        self.clean_source += self.context.get_tabs() * " "
         statement.son_node.accept(self)
 
     def visitBlock(self, block):
@@ -95,15 +96,17 @@ class PrettyPrinter(Visitor):
         Visit and pretty-print the if statement node.
         :param if_statement: if statement node
         """
-        self.clean_source += self.context.get_tabs() * " " + "if (" + if_statement.expression.accept(self) + ") {\n"
+        self.clean_source += "if ("
+        if_statement.expression.accept(self)
+        self.clean_source += ") {\n"
         self.context.increase_tabs()
-        self.visit(if_statement.trueStatement.accept(self))
+        if_statement.trueStatement.accept(self)
         self.context.decrease_tabs()
 
         if if_statement.falseStatement is not None:
             self.clean_source += self.context.get_tabs() * " " + "} else {\n"
             self.context.increase_tabs()
-            self.visit(if_statement.falseStatement.accept(self))
+            if_statement.falseStatement.accept(self)
             self.context.decrease_tabs()
 
         self.clean_source += self.context.get_tabs() * " " + "}\n"
@@ -113,12 +116,13 @@ class PrettyPrinter(Visitor):
         Visit and pretty-print the while statement node.
         :param while_statement: while statement node
         """
-        self.clean_source += self.context.get_tabs() * " " + "while (" + while_statement.expression.accept(
-            self) + ") {\n"
+        self.clean_source += "while ("
+        while_statement.expression.accept(self)
+        self.clean_source += ") {\n"
         self.context.increase_tabs()
-        self.visit(while_statement.statement.accept(self))
+        while_statement.statement.accept(self)
         self.context.decrease_tabs()
-        self.clean_source += self.context.get_tabs() * " " + "}\n"
+        self.clean_source += self.context.get_tabs() * " " + "}"
 
     def visitExpression(self, expression):
         """
@@ -158,8 +162,9 @@ class PrettyPrinter(Visitor):
         :param relation: relation node
         """
         relation.addition1.accept(self)
-        self.clean_source += " "
+
         if relation.relOp is not None:
+            self.clean_source += " "
             relation.relOp.accept(self)
             self.clean_source += " "
             relation.addition2.accept(self)
@@ -237,19 +242,12 @@ class PrettyPrinter(Visitor):
         """
         self.clean_source += literal.name
 
-    def visitType(self, type):
-        """
-        Visit and pretty-print the type node.
-        :param type: type node
-        """
-        self.clean_source += type.type
-
     def visitOperator(self, operator):
         """
         Visit and pretty-print the operator node (relOp, addOp, equOp, unaryOp, mulOp).
         :param operator: operator node
         """
-        self.clean_source += operator.operator
+        self.clean_source += str(operator)
 
     def visitInt(self, int):
         """
@@ -279,24 +277,23 @@ class PrettyPrinter(Visitor):
         """
         self.clean_source += str(boolean.value)
 
+
 class Context:
     """
-    Class representation of the pretty-printer visitor's current context.
+    Class representation of the pretty_printer_pkg visitor's current context.
     """
 
     def __init__(self):
         self.nb_tabs = 0
 
     def increase_tabs(self):
-        self.nb_tabs += 1
+        self.nb_tabs += 4
 
     def decrease_tabs(self):
-        self.nb_tabs -= 1
+        self.nb_tabs -= 4
 
     def get_tabs(self):
         return self.nb_tabs
-
-
 
 
 if __name__ == '__main__':

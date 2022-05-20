@@ -239,7 +239,7 @@ class Parser:
         """
         relation = self.parse_relation()
         if self.peek().tag == LexemTag.EQUAL or self.peek().tag == LexemTag.NOT_EQUAL:
-            equ_op = self.parse_equop().value
+            equ_op = self.parse_equop()
             relation2 = self.parse_relation()
             return Equality(relation, equ_op, relation2)
         return Equality(relation)

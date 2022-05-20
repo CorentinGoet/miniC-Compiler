@@ -7,7 +7,19 @@ import enum
 from AST.node import Node
 
 
-class AddOp(Node, enum.Enum):
+class Operator(Node, str, enum.Enum):
+    """
+    Abstract class for operators.
+    """
+
+    def __str__(self):
+        return self.value
+
+    def accept(self, visitor):
+        return visitor.visitOperator(self)
+
+
+class AddOp(Operator):
     """
     Enumeration of addition operators:
 
@@ -15,28 +27,22 @@ class AddOp(Node, enum.Enum):
     SUB: -
     """
 
-    def accept(self, visitor):
-        return visitor.visitOperator(self)
-
     ADD = "+"
     SUB = "-"
 
 
-class EquOp(Node, enum.Enum):
+class EquOp(Operator):
     """
     Enumeration of the equality operators.
     equal: ==
     unequal: !=
     """
 
-    def accept(self, visitor):
-        return visitor.visitOperator(self)
-
     equal = "=="
     unequal = "!="
 
 
-class UnaryOp(enum.Enum):
+class UnaryOp(Operator):
     """
     Enumeration of Unary operators
 
@@ -45,14 +51,11 @@ class UnaryOp(enum.Enum):
     UnaryOp = - | !
     """
 
-    def accept(self, visitor):
-        return visitor.visitOperator(self)
-
     NEG = "-"
     INV = "!"
 
 
-class RelOp(enum.Enum):
+class RelOp(Operator):
     """
     Relation Operators enumeration
     INF: <
@@ -61,16 +64,13 @@ class RelOp(enum.Enum):
     INFEQ: <=
     """
 
-    def accept(self, visitor):
-        return visitor.visitOperator(self)
-
     INF = "<"
     SUP = ">"
     SUPEQ = ">="
     INFEQ = "<="
 
 
-class MulOp(enum.Enum):
+class MulOp(Operator):
     """
     Enumeration of multiplication operators
 
@@ -78,9 +78,6 @@ class MulOp(enum.Enum):
 
     MulOp = * | / | %
     """
-
-    def accept(self, visitor):
-        return visitor.visitOperator(self)
 
     MUL = "*"
     DIV = "/"

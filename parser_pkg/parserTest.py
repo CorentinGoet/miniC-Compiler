@@ -47,7 +47,7 @@ class ParserTest(unittest.TestCase):
         """
         Test the parse_program function.
         """
-        f = open("../unit_tests/test_sources/test_program.minic", "r")
+        f = open("test_sources/test_program.minic", "r")
         source_code = f.read()
         f.close()
         self.lexer.tokenize(source_code)
@@ -59,7 +59,7 @@ class ParserTest(unittest.TestCase):
         """
         Test the parse_declarations function.
         """
-        f = open("../unit_tests/test_sources/test_declarations.minic", "r")
+        f = open("test_sources/test_declarations.minic", "r")
         source_code = f.read()
         f.close()
         self.lexer.tokenize(source_code)
@@ -76,7 +76,7 @@ class ParserTest(unittest.TestCase):
         self.assertEqual(self.parser.ast.declarations, declarations)
 
         # Test the parse_declarations function with a wrong declaration
-        f = open("../unit_tests/test_sources/test_declaration_error.minic", "r")
+        f = open("test_sources/test_declaration_error.minic", "r")
         source_code = f.read()
         f.close()
         self.lexer.tokenize(source_code)
@@ -86,7 +86,7 @@ class ParserTest(unittest.TestCase):
         """
         Test the parse_assignment function.
         """
-        f = open("../unit_tests/test_sources/test_assignment.minic", "r")
+        f = open("test_sources/test_assignment.minic", "r")
         source_code = f.read()
         f.close()
         self.lexer.tokenize(source_code)
@@ -97,7 +97,7 @@ class ParserTest(unittest.TestCase):
         """
         Test the parse_ifStatement function.
         """
-        f = open("../unit_tests/test_sources/test_ifStatement.minic", "r")
+        f = open("test_sources/test_ifStatement.minic", "r")
         source_code = f.read()
         f.close()
         self.lexer.tokenize(source_code)
@@ -107,7 +107,7 @@ class ParserTest(unittest.TestCase):
         """
         Test the parse_whileStatement function.
         """
-        f = open("../unit_tests/test_sources/test_whileStatement.minic", "r")
+        f = open("test_sources/test_whileStatement.minic", "r")
         source_code = f.read()
         f.close()
         self.lexer.tokenize(source_code)
@@ -118,7 +118,7 @@ class ParserTest(unittest.TestCase):
         """
         Test the parsing of operators.
         """
-        f = open("../unit_tests/test_sources/test_operators.minic", "r")
+        f = open("test_sources/test_operators.minic", "r")
         source_code = f.read()
         f.close()
         self.lexer.tokenize(source_code)
@@ -126,7 +126,7 @@ class ParserTest(unittest.TestCase):
         self.assertEqual(self.parser.lexems, [])
 
         # test operator errors
-        f = open("../unit_tests/test_sources/test_operator_error.minic", "r")
+        f = open("test_sources/test_operator_error.minic", "r")
         source_code = f.read()
         f.close()
         self.lexer.tokenize(source_code)

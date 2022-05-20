@@ -1,0 +1,21 @@
+int main(){
+    int a, b, c;
+    char d;
+    float e, f;
+    bool g, h;
+
+    a = b;
+    g = c || (a == b) && (a == c);
+    if (a == b) {
+        c = d;
+    } else {
+        d = e;
+    }
+    d = -2;
+    e = 'a';
+    f = -2.0;
+    while (a == b) {
+        c = d;
+    }
+    a = 2 + a * b + 4;
+}
